@@ -1271,13 +1271,15 @@ module.exports = function(app,io) {
 			{
 				var child = exec("echo RaspberryPi | sudo rm -rf cadila", function (error, stdout, stderr) {
 					var child = exec("echo RaspberryPi | sudo git clone https://github.com/itechinterface/cadila.git", function (error, stdout, stderr) {
-						var child = exec("echo RaspberryPi | sudo rm -rf /home/pi/Downloads/ShipperScale/app", function (error, stdout, stderr) {
-							var child = exec("echo RaspberryPi | sudo mv /home/pi/Downloads/ShipperScale/cadila/app /home/pi/Downloads/ShipperScale/", function (error, stdout, stderr) {
-								var child = exec("echo RaspberryPi | sudo rm -rf /home/pi/Downloads/ShipperScale/public", function (error, stdout, stderr) {
-									var child = exec("echo RaspberryPi | sudo mv /home/pi/Downloads/ShipperScale/cadila/public /home/pi/Downloads/ShipperScale/", function (error, stdout, stderr) {
-										var child = exec("echo RaspberryPi | sudo rm -rf /home/pi/Downloads/ShipperScale/cadila", function (error, stdout, stderr) {
-											var child = exec("echo RaspberryPi | sudo rm -rf /home/pi/Desktop/1", function (error, stdout, stderr) {
-		
+						var child = exec("echo RaspberryPi | sudo chmod -R 777 /home/pi/Downloads/ShipperScale", function (error, stdout, stderr) {
+							var child = exec("echo RaspberryPi | sudo rm -rf /home/pi/Downloads/ShipperScale/app", function (error, stdout, stderr) {
+								var child = exec("echo RaspberryPi | sudo mv /home/pi/Downloads/ShipperScale/cadila/app /home/pi/Downloads/ShipperScale/", function (error, stdout, stderr) {
+									var child = exec("echo RaspberryPi | sudo rm -rf /home/pi/Downloads/ShipperScale/public", function (error, stdout, stderr) {
+										var child = exec("echo RaspberryPi | sudo mv /home/pi/Downloads/ShipperScale/cadila/public /home/pi/Downloads/ShipperScale/", function (error, stdout, stderr) {
+											var child = exec("echo RaspberryPi | sudo rm -rf /home/pi/Downloads/ShipperScale/cadila", function (error, stdout, stderr) {
+												/*var child = exec("echo RaspberryPi | sudo rm -rf /home/pi/Desktop/1", function (error, stdout, stderr) {
+			
+												});*/
 											});
 										});
 									});
