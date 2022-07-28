@@ -1,0 +1,969 @@
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <header class="main-header">
+        <a class="logo"><b>ACCENT</b>INST.</a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="hidden-xs"></span>
+                            <span class="hidden-xs">SYSTEM IP : {{Model.networkip}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel" ng-show="Model.isLogin">
+                <!--<div class="pull-left image">-->
+                    <!--<p data-letters="{{Model.shortnameStr}}"></p>-->
+                <!--</div>-->
+                <div class="pull-left info" style="margin-left:-15px">
+                    <p>{{Model.fullnameStr}}</p>
+                    <!--<a><i></i>Shift : 12 AM - 04 PM</a>-->
+                </div>
+            </div>
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" ng-show="Model.isLogin" style="margin-top: -15px">
+                <li class="header">SETINGS</li>
+                <li>
+                    <a href="" ng-click="dashboard()">
+                        <i class="fa fa-th"></i> <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-click="createNewBatch()">
+                        <i class="fa fa-th"></i> <span>Create New Batch</span>
+                    </a>
+                </li>
+                <!--<li>-->
+                    <!--<a href="" ng-click="batchFilter(2)">-->
+                        <!--<i class="fa fa-th"></i> <span>Batch On Hold</span> <small class="label pull-right bg-red">{{Model.totalOnHold}}</small>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="" ng-click="batchFilter(3)">-->
+                        <!--<i class="fa fa-th"></i> <span>Batch Completed</span> <small class="label pull-right bg-green">{{Model.totalCompleted}}</small>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <li>
+                    <a href="" ng-click="batchFilter(-1)">
+                        <i class="fa fa-th"></i> <span>Batch List</span> <small class="label pull-right bg-blue">{{Model.totalAll}}</small>
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-click="recordMasterList()">
+                        <i class="fa fa-th"></i> <span>Master List</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-click="masterRecord()">
+                        <i class="fa fa-th"></i> <span>Create New Record Master</span>
+                    </a>
+                </li>
+                <!--<li>-->
+                    <!--<a href="" ng-click="zero()">-->
+                        <!--<i class="fa fa-th"></i> <span>Zero</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <li>
+                    <a href="" ng-click="manual()">
+                        <i class="fa fa-th"></i> <span>Manual Print</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-click="adminSettings()">
+                        <i class="fa fa-th"></i> <span>Admin Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-click="screenLock()">
+                        <i class="fa fa-th"></i> <span> Screen Lock</span><i class="pull-right fa fa-unlock-alt"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-click="logout()">
+                        <i class="fa fa-th"></i> <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="sidebar-menu" style="margin-top: -15px">
+
+                <div style="width:200px;height:220px;background-color: transparent;position: fixed;bottom:80px;">
+                    <img src="images/accent.png" style="width: 200px;margin-left: 10px">
+                    <div class="user-panel">
+                        <div class="pull-left info" style="margin-left:-15px">
+                            <p style="text-align: center;">152,Sukan Mall, Science City Road,Sola, Ahmedabad - 380060</p>
+                            <p style="text-align: center;">MOBILE : 9723812726 , 9824312729</p>
+                            <p style="text-align: center;">EMAIL : deep@accentinstruments.in , info@accentinstruments.in</p>
+
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- =============================================== -->
+
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <div class="content-wrapper" style="height:auto">
+        <!--<ul ng-hide="Model.weightScreen_hidden" class="slideshow">
+            <li> <span></span> </li>
+            <li> <span></span> </li>
+            <li> <span></span> </li>
+        </ul>-->
+        <br>
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <!--<h3 style="color: black;font-weight: bolder;font-size:25px">-->
+                <!--Weight : {{Model.cWeight}}-->
+            <!--</h3>-->
+
+            <div class="inner" style="margin-top: -50px">
+                <h3 style="font-size: 100px;font-weight: bold">
+                    {{Model.cWeight}} Kg.
+                </h3>
+            </div>
+            <!--<div ng-show="Model.weightScreen_hidden">-->
+                <!---->
+            <!--</div>-->
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">{{Model.title}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>{{Model.description}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal fade" id="myModalPass" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">{{Model.title}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input id="divCaps4" onkeypress="capLock(event,'divCaps4')" style="width: 80%" type="password"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button ng-click="handleBack()" type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+            <div ng-hide="Model.lockScreen_hidden" class="lockscreen-item">
+            <!-- lockscreen image -->
+            <div class="lockscreen-image">
+                <img src="dist/img/lock.png" alt="user image" style="background-color: transparent"/>
+            </div>
+            <form class="lockscreen-credentials">
+                <div class="input-group">
+                    <input id="divCaps5" onkeypress="capLock(event,'divCaps5')" ng-model="Model.lockPassword" type="password" class="form-control" placeholder="password" />
+                    <div class="input-group-btn">
+                        <button ng-click="openLock()" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div ng-hide="Model.lockScreen_hidden" class="help-block text-center">
+            <!--Enter your password to retrieve your session-->
+            {{Model.lockmsg}}
+        </div>
+        <!-- Main content -->
+        <section class="content">
+            <!--Login Start Here -->
+            <div ng-hide="Model.loginScreen_hidden" class="login-box">
+                <div class="login-logo">
+                    <b>USER LOGIN</b></a>
+                </div>
+                <div class="login-box-body">
+                    <p class="login-box-msg">LOGIN TO START</p>
+                    <div class="form-group has-feedback">
+                        <input ng-model="Model.username" type="text" class="form-control" placeholder="Username"/>
+                        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <!--<label  style="visibility:hidden;color: red">Caps Lock is on.</label>-->
+                        <input id="divCaps1" onkeypress="capLock(event,'divCaps1')" ng-model="Model.password" type="password" class="form-control" placeholder="Password"/>
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>SELECT SHIFT TIME</label>
+                        <select class="form-control" ng-model="shift_time">
+                            <option ng-repeat="shift_time in ['I','II','III']" value="{{shift_time}}">{{shift_time}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input ng-model="Model.workername" type="text" class="form-control" placeholder="Worker Name"/>
+                        <span class="form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button ng-click="login()" class="btn btn-primary btn-block btn-flat">SIGN IN</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button ng-click="clearLogin()" class="btn btn-primary btn-block btn-flat">CLEAR</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group has-feedback">
+                        <button ng-click="goRegistration()" class="btn btn-primary btn-block btn-flat">REGISTRATION</button>
+                    </div>
+
+
+                </div>
+            </div>
+            <!--Login End Here-->
+
+            <!--Registration Start Here-->
+            <div ng-hide="Model.registerScreen_hidden" class="register-box">
+                <div class="register-logo">
+                    <b>NEW REGISTRATION</b></a>
+                </div>
+
+                <div class="register-box-body">
+                    <p class="login-box-msg">Register a new user</p>
+                    <div class="form-group has-feedback">
+                        <input ng-model="Model.firstname" type="text" class="form-control" placeholder="First name"/>
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input ng-model="Model.lastname" type="text" class="form-control" placeholder="Last name"/>
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input ng-model="Model.username_reg" type="text" class="form-control" placeholder="Username"/>
+                        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="divCaps2" onkeypress="capLock(event,'divCaps2')" ng-model="Model.password_reg" type="password" class="form-control" placeholder="Password"/>
+                        <span class="divCaps2 glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="divCaps3" onkeypress="capLock(event,'divCaps3')" ng-model="Model.repassword" type="password" class="form-control" placeholder="Retype password"/>
+                        <span class="divCaps3 glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button ng-click="registration()" class="btn btn-primary btn-block btn-flat">REGISTRATION</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button ng-click="clearLogin()" class="btn btn-primary btn-block btn-flat">CLEAR</button>
+                        </div>
+                    </div>
+                    <br>
+                    <a href="" ng-click="goLogin()" class="text-center">Click to Login Page</a>
+                </div><!-- /.form-box -->
+            </div>
+            <!--Registration End Here-->
+
+            <div ng-hide="Model.weightScreen_hidden" class="row">
+                <div class="col-xs-12">
+                    <div class="box box-solid">
+                        <div class="box-body">
+                            <div class="box-header">
+                                <h3 class="box-title">Weight Information</h3>
+                            </div>
+                            <!--<div class="box-header">-->
+                                <!--<h3 class="box-title"></h3>-->
+                            <!--</div>-->
+                            <div class="row">
+                                <div class="col-lg-3 col-xs-6">
+                                    <div class="small-box bg-blue">
+                                        <div class="inner">
+                                            <h3>
+                                                {{Model.cWeight}} Kg.
+                                            </h3>
+                                            <p>
+                                                Current Wt.
+                                            </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-social-dropbox-outline"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-xs-6">
+                                    <div class="small-box bg-purple">
+                                        <div class="inner">
+                                            <h3>
+                                                {{Model.cMin}} Kg.
+                                            </h3>
+                                            <p>
+                                                Min.Shipper.Wt.
+                                            </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-arrow-down-a"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-xs-6">
+                                    <div class="small-box bg-teal">
+                                        <div class="inner">
+                                            <h3>
+                                                {{Model.cMax}} Kg.
+                                            </h3>
+                                            <p>
+                                                Max.Shipper.Wt.
+                                            </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-arrow-up-a"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-xs-6">
+                                    <div class="small-box bg-maroon">
+                                        <div class="inner">
+                                            <h3>
+                                                {{Model.selectedBatch.BoxCompleted}}
+                                            </h3>
+                                            <p>
+                                                Box Count {{Model.selectedBatch.BoxCompleted}} of {{Model.selectedBatch.BoxQty}}
+                                            </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-android-print"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="row">-->
+                                <!--<div ng-show="Model.plusShow" class="col-md-3 col-sm-6 col-xs-6 text-center">-->
+                                    <!--<input id="cWeight" value="0" disabled data-min="0" data-max="60000" class="knob" data-width="240" data-height="240" data-fgColor="#00c0ef" />-->
+                                    <!--<div class=""><h2>Current Wt.</h2></div>-->
+                                <!--</div>-->
+                                <!--<div ng-show="Model.minusShow" class="col-md-3 col-sm-6 col-xs-6 text-center">-->
+                                    <!--<input id="cWeightN" disabled type="text" data-min="-60000" data-max="0" class="knob" value="0" data-width="240" data-height="240" data-bgColor="#FF0000" data-fgColor="#000000"/>-->
+                                    <!--<div class=""><h2>Current Wt.</h2></div>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 col-sm-6 col-xs-6 text-center">-->
+                                    <!--<input disabled type="text" data-min="0" data-max="{{Model.cMin}}" class="knob" value="{{Model.cMin}}" data-width="240" data-height="240" data-fgColor="#f56954" data-bgColor="#00c0ef"/>-->
+                                    <!--<div class=""><h2>Min. Shipper Wt.</h2></div>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 col-sm-6 col-xs-6 text-center">-->
+                                    <!--<input disabled type="text" data-min="0" data-max="{{Model.cMax}}" class="knob" value="{{Model.cMax}}" data-width="240" data-height="240" data-fgColor="#00a65a" data-bgColor="#00c0ef"/>-->
+                                    <!--<div class=""><h2>Max. Shipper Wt.</h2></div>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 col-sm-6 col-xs-6 text-center">-->
+                                    <!--<input id="totalBoxes" disabled type="text" data-min="0" data-max="{{Model.selectedBatch.BoxQty}}" class="knob" value="0" data-width="240" data-height="240" data-fgColor="#f39c12"/>-->
+                                    <!--<div class=""><h2>Total Boxes {{Model.selectedBatch.BoxCompleted}} of {{Model.selectedBatch.BoxQty}}</h2></div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-hide="Model.weightScreen_hidden" class="box">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box-body table-responsive no-padding">
+                                <table class="table">
+                                    <tr>
+                                        <th>Master Number</th>
+                                        <th>Product Name</th>
+                                        <th>Full Name1</th>
+                                        <th>Full Name2</th>
+                                        <th>Batch. No.</th>
+                                        <th>Half Shipper Wt.</th>
+                                        <th>Mfg. Date</th>
+                                        <th>Exp. Date</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{Model.selectedBatch.MasterNumber}}</td>
+                                        <td>{{Model.selectedBatch.ProductName}}</td>
+                                        <td>{{Model.selectedBatch.FullName1}}</td>
+                                        <td>{{Model.selectedBatch.FullName2}}</td>
+                                        <td>{{Model.selectedBatch.MfgNo}}</td>
+                                        <td>{{Model.selectedBatch.HalfCarton}}</td>
+                                        <td>{{Model.selectedBatch.MfgDate}}</td>
+                                        <td>{{Model.selectedBatch.ExpDate}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box-body table-responsive no-padding">
+                                <table class="table">
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Country Name</th>
+                                        <th>File ID</th>
+                                        <th>Box Details</th>
+                                        <th>Remarks1</th>
+                                        <th>Remarks2</th>
+                                        <th>Remarks3</th>
+                                        <th>Print Format</th>
+                                        <th>Force Print</th>                                        
+                                    </tr>
+                                    <tr style="cursor: pointer;">
+                                        <td ng-if="Model.selectedBatch.Status==0"><span class="label label-primary">NOT STARTED</span></td>
+                                        <td ng-if="Model.selectedBatch.Status==1"><span class="label label-success">RUNNING</span></td>
+                                        <td ng-if="Model.selectedBatch.Status==2"><span class="label label-waring">ON HOLD</span></td>
+                                        <td ng-if="Model.selectedBatch.Status==3"><span class="label label-default">COMPLETED</span></td>
+                                        <td ng-if="Model.selectedBatch.Status==4"><span class="label label-danger">DELETED</span></td>
+                                        <td>{{Model.selectedBatch.CountryName}}</td>
+                                        <td>{{Model.selectedBatch.NB_ID}}</td>
+                                        <td>{{Model.selectedBatch.BoxDetails}}</td>
+                                        <td>{{Model.selectedBatch.Remarks1}}</td>
+                                        <td>{{Model.selectedBatch.Remarks2}}</td>
+                                        <td>{{Model.selectedBatch.Remarks3}}</td>
+                                        <td>{{Model.selectedBatch.PrintFormat == 1 ? '4x3' : '2x2'}} Label</td>
+                                        <td><span ng-click="forcePrinter()" class="label label-danger">FORCE PRINT</span></td>
+                                    </tr>
+                                </table>
+                                <br><br>
+                                <div ng-show="Model.isLogin" class="row" style="margin-left:50px">
+                                    <div class="form-group has-feedback">
+                                        <input ng-model="Model.dupShipper" type="text" class="form-control" style="width:300px;" placeholder="Shipper Number"/>
+                                    </div>
+                                    <div class="col-xs-4" style="width:200px;">
+                                        <button ng-click="duplicate()" class="btn btn-primary btn-block btn-flat">Duplicate Print</button>
+                                    </div>
+				</div><br>
+				<div class="row" style="margin-left:50px">
+                                    <div class="col-xs-4" style="width:200px;">
+                                        <button ng-click="manual()" class="btn btn-primary btn-block btn-flat">Manual Print</button>
+                                    </div>
+                                </div>
+                                <br><br>
+                    
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+            <!--Chart End Here-->
+
+            <!--Table Start Here-->
+            <div ng-hide="Model.batchInfoScreen_hidden" class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Batch Information</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>MasterNumber</th>
+                                    <th>ProductName</th>
+                                    <th>Batch No.</th>
+                                    <th>Box Completed</th>
+                                    <th>Half Shipper Wt.</th>
+                                    <th>Min.Ship.Wt.</th>
+                                    <th>Max.Ship.Wt.</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr style="cursor: pointer;" ng-repeat="batch in Model.all_batch_records">
+                                    <!-- <td ng-click="viewBatch(batch)"><span class="label label-success">{{batch.NB_ID}} - VIEW </span></td> -->
+                                    <td><span ng-if="batch.Status==0 || batch.Status==1 || batch.Status==2 " ng-click="editBatch(batch)" class="label label-info">Edit </span>&nbsp;&nbsp;&nbsp;<span ng-click="viewBatch(batch)" class="label label-success">VIEW </span>
+                                        &nbsp;&nbsp;&nbsp;<span ng-click="testprint(batch)" class="label label-waring">Test Print</span>
+                                    </td>
+                                    <td>{{batch.MasterNumber}}</td>
+                                    <td>{{batch.ProductName}}</td>
+                                    <td>{{batch.MfgNo}}</td>
+                                    <td>{{batch.BoxCompleted}}</td>
+                                    <td>{{batch.HalfCarton}}</td>
+                                    <td>{{batch.MinShipperWt | number : 3 }}</td>
+                                    <td>{{batch.MaxShipperWt | number : 3 }}</td>
+                                    <td ng-if="batch.Status==0"><span class="label label-primary">NOT STARTED</span></td>
+                                    <td ng-if="batch.Status==1"><span class="label label-success">RUNNING</span></td>
+                                    <td ng-if="batch.Status==2"><span class="label label-waring">ON HOLD</span></td>
+                                    <td ng-if="batch.Status==3"><span class="label label-default">COMPLETED</span></td>
+                                    <td ng-if="batch.Status==4"><span class="label label-danger">DELETED</span></td>
+
+                                    <td ng-click="changeBatchStatus(batch)" ng-if="batch.Status==0"><span class="label label-success">START</span></td>
+                                    <td ng-if="batch.Status==1">
+                                        <span ng-click="changeBatchStatus(batch)" class="label label-waring">HOLD</span>
+                                        <span ng-click="changeBatchComplete(batch)" class="label label-default">COMPLETE</span>
+                                    </td>
+                                    <td ng-click="changeBatchStatus(batch)"  ng-if="batch.Status==2"><span class="label label-success">RESUME</span></td>
+                                    <td ng-if="batch.Status==3">
+                                        <span ng-click="changeBatchStatus(batch)" class="label label-danger">DELETE</span>
+                                        <span ng-hide="!Model.reopenHide" ng-click="reopenBatch(batch)" class="label label-success">REOPEN</span>
+                                    </td>
+                                    <td ng-click="changeBatchStatus(batch)" ng-if="batch.Status==4"><span class="label label-danger">P.DELETE</span></td>
+                                </tr>
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div>
+            </div>
+            <!--Table End Here-->
+
+
+            <!--Table Start Here-->
+            <div ng-hide="Model.masterInfoScreen_hidden" class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Master Record List</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>MasterNumber</th>
+                                    <th>ProductName</th>
+                                    <th>Full Name 1.</th>
+                                    <th>Full Name 2.</th>
+                                    <th>Box Details.</th>
+                                    <th>Print Format.</th>
+                                </tr>
+                                <tr style="cursor: pointer;" ng-repeat="master in Model.all_master_records">
+                                    <td><span ng-click="editMaster(master)" class="label label-success">Edit </span></td>
+                                    <td>{{master.MasterNumber}}</td>
+                                    <td>{{master.ProductName}}</td>
+                                    <td>{{master.FullName1}}</td>
+                                    <td>{{master.FullName2}}</td>
+                                    <td>{{master.BoxDetails}}</td>
+                                    <td ng-if="master.PrintFormat == 1">4x3</td>
+                                    <td ng-if="master.PrintFormat == 2">2x2</td>
+                                </tr>
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div>
+            </div>
+            <!--Table End Here-->
+
+            <!--Form Start Here-->
+            <div class="row">
+            <div class="col-md-6">
+                <div ng-hide="Model.formNewBatch_hidden" class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Create New Batch</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Select Item Code Number</label>
+                                <select ng-change="reloadProducts(master_record)" class="form-control" ng-model="master_record">
+                                    <option ng-repeat="master_record in Model.batchMasterRecords track by $index" value="{{master_record}}">{{master_record}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Select Product</label>
+                                <select class="form-control" ng-model="product">
+                                    <option ng-repeat="product in Model.productsInMaster track by $index" value="{{product}}">{{product}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Enter Batch. No</label>
+                                <input ng-model="Model.mfgNo" type="text" class="form-control" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label>Enter Mfg. Lic. No</label>
+                                <input ng-model="Model.mfgLicNo" type="text" class="form-control" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label>Enter Mfg. Date</label>
+                                <input ng-model="Model.mfgDate" type="text" class="form-control" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label>Enter Exp. Date</label>
+                                <input ng-model="Model.expDate" type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Enter half weight of filled carton box</label>
+                                <input ng-model="Model.halfCarton" type="number" class="form-control" placeholder="">
+                            </div>
+
+                            <!--<div ng-hide="!Model.csvHide" class="form-group">
+                                <label>Select Min and Max Shipper Weight</label>
+                                <input type="text" value="" class="slider form-control" data-slider-min="-200" data-slider-max="200" data-slider-step="5" data-slider-value="[-100,100]" data-slider-orientation="horizontal" data-slider-selection="before" data-slider-tooltip="show" data-slider-id="red">
+                            </div>-->
+                            <div ng-hide="!Model.csvHide" class="box-body">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <label>Enter Min Shipper Weight.</label>
+                                        <input ng-model="Model.minShipperWt" type="number" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <label>Enter Max Shipper Weight.</label>
+                                        <input ng-model="Model.maxShipperWt" type="number" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Enter Box Quantity</label>
+                                <input ng-model="Model.boxQty" type="number" class="form-control" placeholder="">
+                            </div>
+
+                            <div class="box-body">
+                                <div class="row">
+                                    <!--<div class="col-xs-4">-->
+                                        <!--<label>Enter Shipper No.</label>-->
+                                        <!--<input ng-model="Model.shipperNo" type="text" class="form-control" placeholder="">-->
+                                    <!--</div>-->
+                                    <div class="col-xs-4">
+                                        <label>Enter Country Name</label>
+                                        <input ng-model="Model.countryName" type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <!--<div class="col-xs-4">-->
+                                        <!--<label>Shipper Packed By : </label>-->
+                                        <!--<select class="form-control" ng-model="user">-->
+                                            <!--<option ng-repeat="user in Model.users" value="{{user.Username}}">{{user.Username}}</option>-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                        </div><!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button ng-click="saveBatch()" type="submit" class="btn btn-primary">Save Batch</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button ng-hide="!Model.csvHide" ng-click="openCSV()" class="btn btn-primary">View</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="col-md-6">
+                <div ng-hide="Model.formMaster_hidden" class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Add Master Record</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Select Print Format</label>
+                                <select class="form-control" ng-model="print_format">
+                                    <option ng-repeat="print_format in Model.printSettings" value="{{print_format}}">{{print_format}}</option>
+                                </select>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label>Select Item Code Number</label>
+                                <select class="form-control" ng-model="master">
+                                    <option ng-repeat="master in Model.masterRecords" value="{{master}}">{{master}}</option>
+                                </select>
+                            </div> -->
+                            <div ng-show="Model.newNumber" class="form-group">
+                                <label>Add New Item Code Number</label>
+                                <input style="text-transform:uppercase" ng-model="Model.newMasterNumber" type="text" class="form-control" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label>Enter Product Name</label>
+                                <input ng-model="Model.masterProductName" type="text" class="form-control" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label>Enter Product Generic Name</label>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <input ng-model="Model.masterFullName1" type="text" class="form-control" placeholder="">
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <input ng-model="Model.masterFullName2" type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Box Details  ( e.g 30x30x30 )</label>
+                                <input ng-model="Model.masterBoxDetails" type="text" class="form-control" placeholder="">
+                            </div>
+
+                            <label>Enter Remarks</label>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <input ng-model="Model.masterRemarks1" type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input ng-model="Model.masterRemarks2" type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input ng-model="Model.masterRemarks3" type="text" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button ng-click="saveMaster()" type="submit" class="btn btn-primary">Save Master</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+            <div ng-hide="Model.adminSettings_hidden"  class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <!--<div class="small-box bg-aqua">-->
+                        <!--<div class="inner">-->
+                            <!--<p>-->
+                                <!--Weight-->
+                            <!--</p>-->
+                            <!--<h3>-->
+                                <!--{{Model.cWeight}}-->
+                            <!--</h3>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div ng-hide="Model.adminSettings_hidden" class="box box-warning">
+                        <div class="box-header">
+                            <h3 class="box-title">Settings</h3>
+                        </div><!-- /.box-header -->
+                        <!-- form start -->
+                        <form role="form">
+                            <div class="box-body">
+                                <!--<div class="form-group">-->
+                                    <!--<label>Select Print Format</label>-->
+                                    <!--<div class="input-group input-group-sm">-->
+                                        <!--<select class="form-control" ng-model="print_format">-->
+                                            <!--<option ng-repeat="print_format in Model.printSettings" value="{{print_format}}">{{print_format}}</option>-->
+                                        <!--</select>-->
+                                        <!--<span class="input-group-btn">-->
+                                        <!--<button ng-click="printFormat()" class="btn btn-info btn-flat" type="button">Save</button>-->
+                                        <!--</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label>Server IP  ( e.g. 192.168.0.1 )</label>-->
+                                    <!--<div class="input-group input-group-sm">-->
+                                        <!--<input ng-model="Model.serverip" type="text" class="form-control" placeholder="192.168.0.1">-->
+                                        <!--<span class="input-group-btn">-->
+                                        <!--<button ng-click="setServerip()" class="btn btn-info btn-flat" type="button">Save</button>-->
+                                        <!--</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+
+                                <div class="form-group">
+                                    <label>Buzzer ON/OFF</label>
+                                    <div class="input-group input-group-sm">
+                                        <button ng-click="zerp()" class="btn btn-info btn-flat" type="button">{{Model.buzzer}}</button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Time status</label>
+                                    <div class="input-group input-group-sm">
+                                        <button ng-click="cw()" class="btn btn-info btn-flat" type="button">{{Model.timeformat}}</button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Force Print +- Limit  ( e.g. 1,5,10,15,20 ) </label>
+                                    <div class="input-group input-group-sm">
+                                        <input ng-model="Model.res" type="text" class="form-control" placeholder="">
+                                        <span class="input-group-btn">
+                                        <button ng-click="res()" class="btn btn-info btn-flat" type="button">Save</button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Date Settings ( e.g. 2017-12-25 15:34:56 ) </label>
+                                    <div class="input-group input-group-sm">
+                                        <input ng-model="Model.datetimeset" type="text" class="form-control" placeholder="">
+                                        <span class="input-group-btn">
+                                        <button ng-click="setDateTime()" class="btn btn-info btn-flat" type="button">Save</button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!--<div class="form-group">
+                                    <label>Max Capacity  ( e.g. 30000 )</label>
+                                    <div class="input-group input-group-sm">
+                                        <input ng-model="Model.cap" type="text" class="form-control" placeholder="">
+                                        <span class="input-group-btn">
+                                        <button ng-click="cap()" class="btn btn-info btn-flat" type="button">Save</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Resolution  ( e.g. 1,2,5,10.... ) </label>
+                                    <div class="input-group input-group-sm">
+                                        <input ng-model="Model.res" type="text" class="form-control" placeholder="">
+                                        <span class="input-group-btn">
+                                        <button ng-click="res()" class="btn btn-info btn-flat" type="button">Save</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>ZERO Point Settings  ( e.g. 1,2,5,10.... ) </label>
+                                    <div class="input-group input-group-sm">
+                                        <input ng-model="Model.zerp" type="text" class="form-control" placeholder="">
+                                        <span class="input-group-btn">
+                                        <button ng-click="zerp()" class="btn btn-info btn-flat" type="button">Save</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Calibration Weight  ( e.g. 10000 ) </label>
+                                    <div class="input-group input-group-sm">
+                                        <input ng-model="Model.cw" type="text" class="form-control" placeholder="">
+                                        <span class="input-group-btn">
+                                        <button ng-click="cw()" class="btn btn-info btn-flat" type="button">Save</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Set Decimal  ( e.g. 1,2,3 ) </label>
+                                    <div class="input-group input-group-sm">
+                                        <input ng-model="Model.dp" type="text" class="form-control" placeholder="">
+                                        <span class="input-group-btn">
+                                        <button ng-click="dp()" class="btn btn-info btn-flat" type="button">Save</button>
+                                        </span>
+                                    </div>
+                                </div>-->
+
+                            </div><!-- /.box-body -->
+
+                            <!--<div class="box-footer">
+                                <button ng-click="zero()"  type="submit" class="btn btn-primary">ZERO</button>
+                                <button ng-click="reset()" type="submit" class="btn btn-primary">RESET</button>
+                            </div>-->
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div ng-hide="Model.adminSettings_hidden" class="box box-warning">
+                        <div class="box-header">
+                            <h3 class="box-title">Users</h3>
+                        </div><!-- /.box-header -->
+                        <!-- form start -->
+                        <form role="form" ng-hide="!Model.changepass">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label> Change Admin Password </label>
+                                    <div class="input-group input-group-sm">
+                                        <input ng-model="Model.adminPassword" type="text" class="form-control" placeholder="">
+                                        <span class="input-group-btn">
+                                        <button ng-click="changeAdminPassword()" class="btn btn-info btn-flat" type="button">Save</button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div ng-repeat="item in Model.users  track by $index" class="form-group">
+                                    <label> Change {{item.FirstName}}  {{item.LastName}} Password </label>
+                                    <div class="input-group input-group-sm">
+                                        <input ng-model="item.Username" type="text" placeholder="" style="width: 40%"> <label style="width: 20px"></label>
+                                        <input ng-model="item.Password" type="text" placeholder="" style="width: 40%">
+                                        <span class="input-group-btn">
+                                        <button ng-click="updateUser(item)" class="btn btn-info btn-flat" type="button">Save</button> <label style="width: 20px"></label>
+                                        <button ng-click="deleteUser(item)" class="btn btn-danger btn-flat" type="button">Delete</button>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                            </div><!-- /.box-body -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div style="height: 200px"></div>
+    </div>
+    <!--<footer class="main-footer">-->
+        <!--<div class="pull-right hidden-xs">-->
+            <!--<b>Version</b> 1.0-->
+        <!--</div>-->
+        <!--<strong>Copyright &copy; 2017-2018 <a></a>.</strong> All rights reserved.-->
+    <!--</footer>-->
+</div><!-- ./wrapper -->
+
+<!-- Bootstrap 3.3.2 -->
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!-- Font Awesome Icons -->
+<link href="../dist/css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!-- Ionicons -->
+<!--<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />-->
+<link href="../dist/css/ionicons-2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+<!-- Theme style -->
+<link href="../dist/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+     folder instead of downloading all of them to reduce the load. -->
+<link href="../dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+<!-- bootstrap slider -->
+<link href="  ../plugins/bootstrap-slider/slider.css" rel="stylesheet" type="text/css" />
+
+<!--Special-->
+<!-- jQuery 2.1.3 -->
+<script src="../plugins/jQuery/jQuery-2.1.3.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../dist/js/app.min.js" type="text/javascript"></script>
+<!--<script src="../plugins/knob/jquery.knob.js" type="text/javascript"></script>-->
+<script src="../plugins/bootstrap-slider/bootstrap-slider.js" type="text/javascript"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.10/d3.min.js"></script>-->
+<script type="text/javascript">
+    function capLock(e,ID){
+        kc = e.keyCode?e.keyCode:e.which;
+        sk = e.shiftKey?e.shiftKey:((kc == 16)?true:false);
+        if(((kc >= 65 && kc <= 90) && !sk)||((kc >= 97 && kc <= 122) && sk)){
+            document.getElementById(ID).style.backgroundColor = 'red';
+            document.getElementById(ID).style.color = 'white';
+        }
+        else{
+            document.getElementById(ID).style.backgroundColor = 'white';
+            document.getElementById(ID).style.color = 'black';
+        }
+
+    }
+</script>
+
