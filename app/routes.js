@@ -1293,7 +1293,7 @@ module.exports = function(app,io) {
 			
 		},1000);
 	}
-	//
+	//1
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html');
 	});
