@@ -364,7 +364,9 @@ angular.module('starter.controllers', [])
                         }
                     }
                     else{
-                        alert("Weight Out of Range");
+                        if(lastWeight > 0.050){
+                            alert("Weight Out of Range");
+                        }
                     }
                 }
             }
