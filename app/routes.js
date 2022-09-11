@@ -69,7 +69,7 @@ module.exports = function(app,io) {
 	});
 	
 	///////// GENERAL_SETTINGS //////////////////////////
-	/*	var r   = 33;
+		var r   = 33;
 		var y   = 35;
 		var g   = 37;
 		var b   = 40;
@@ -130,7 +130,7 @@ module.exports = function(app,io) {
 
 		gpio.setup(16, gpio.DIR_IN, gpio.EDGE_BOTH);
 	
-    */     
+        
 	var SerialPort = require('serialport');
     	//const Readline = SerialPort.parsers.Readline;
 
