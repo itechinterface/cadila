@@ -292,7 +292,7 @@ module.exports = function(app,io) {
 			
 			printer_.write("^XA^PW799^LL599^LS0", function (err) {
 			});
-			printer_.write("^FO0,180^GB1600,0,3^FS", function (err) {
+			printer_.write("^FO0,180^GB799,0,3^FS", function (err) {
 			});
 
 			printer_.write("^FO40,280^A0N,30,30^FDManufactured by:^FS^FS^FS", function (err) {
@@ -305,7 +305,7 @@ module.exports = function(app,io) {
 			});
 			printer_.write("^FO40,510^A0N,24,24^FDDist.:Ahmedabad.^FS ^FS ^FS", function (err) {
 			});
-			printer_.write("^FO340,180^GB0,800,2^FS", function (err) {
+			printer_.write("^FO340,180^GB0,425,2^FS", function (err) {
 			});
 
 			for (var i = 0; i < label_settings_4x3.length; i++) {
@@ -1191,14 +1191,14 @@ module.exports = function(app,io) {
 		db.all("SELECT * FROM LabelSettings4x3 where IsActive = 1", function(err, rows) {
 			label_settings_4x3 = rows;
 
-			var str = "^PW799^LL599^LS0";
-			str+="^FO0,180^GB1600,0,3^FS";
+			var str = "^XA^PW799^LL599^LS0";
+			str+="^FO0,180^GB799,0,3^FS";
 			str+="^FO40,280^A0N,30,30^FDManufactured by:^FS^FS^FS";
 			str+="^FO40,340^A0N,50,45^FDCADILA^FS ^FS ^FS"
 			str+="^FO40,410^A0N,22,22^FDPHARMACEUTICALS  LIMITED^FS ^FS ^FS";
 			str+="^FO40,460^A0N,24,24^FD1389,Dholka-382225,^FS ^FS ^FS";
 			str+="^FO40,510^A0N,24,24^FDDist.:Ahmedabad.^FS ^FS ^FS";
-			str+="^FO340,180^GB0,800,2^FS";
+			str+="^FO340,180^GB0,425,2^FS";
 			for (var i = 0; i < label_settings_4x3.length; i++) {
 
 				var item = label_settings_4x3[i];
