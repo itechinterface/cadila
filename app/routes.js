@@ -245,7 +245,7 @@ module.exports = function(app,io) {
         	date_time = date_time.replace('-', '/');
 			date_time = date_time.replace('-', '/');
 
-			printer_.write("^XA^PR4^MD24", function (err) {
+			printer_.write("^XA^PW400^LL400^LS0", function (err) {
 			});
 
 			for (var i = 0; i < label_settings_2x2.length; i++) {
@@ -290,7 +290,7 @@ module.exports = function(app,io) {
 			date_time = date_time.replace('-', '/');
 			date_time = date_time.replace('-', '/');
 			
-			printer_.write("^XA^PR4^MD24", function (err) {
+			printer_.write("^XA^PW799^LL599^LS0", function (err) {
 			});
 			printer_.write("^FO0,180^GB1600,0,3^FS", function (err) {
 			});
@@ -1137,7 +1137,7 @@ module.exports = function(app,io) {
 		db.all("SELECT * FROM LabelSettings2x2 where IsActive = 1", function(err, rows) {
 			label_settings_2x2 = rows;
 
-			var str = "^XA^PR4^MD24";
+			var str = "^XA^PW400^LL400^LS0";
 			for (var i = 0; i < label_settings_2x2.length; i++) {
 					var item = label_settings_2x2[i];
 					if (item.Id == 1) {
@@ -1160,6 +1160,7 @@ module.exports = function(app,io) {
 					}
 				}
 				str+="^XZ";
+				console.log(str);
 				res.json({'error':false,'message':"Data updated successfully","cmd":str});
 		});
 		
@@ -1190,7 +1191,7 @@ module.exports = function(app,io) {
 		db.all("SELECT * FROM LabelSettings4x3 where IsActive = 1", function(err, rows) {
 			label_settings_4x3 = rows;
 
-			var str = "^XA^PR4^MD24";
+			var str = "^PW799^LL599^LS0";
 			str+="^FO0,180^GB1600,0,3^FS";
 			str+="^FO40,280^A0N,30,30^FDManufactured by:^FS^FS^FS";
 			str+="^FO40,340^A0N,50,45^FDCADILA^FS ^FS ^FS"
@@ -1252,7 +1253,7 @@ module.exports = function(app,io) {
 				}
 			}
 			str+="^XZ";
-			
+			console.log(str);
 			res.json({'error':false,'message':"Data updated successfully","cmd":str});
 		});
 
