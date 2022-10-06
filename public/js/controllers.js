@@ -381,8 +381,8 @@ angular.module('starter.controllers', [])
         }
 
         $scope.deleteShipper = function(item){
-            if($scope.Model.showManualEntryFields == false)
-            return;
+            //if($scope.Model.showManualEntryFields == false)
+            //return;
             if($rootScope.username != 'admin')
                 return;
             //if(item.ID == $scope.Model.shipperData[0].ID)

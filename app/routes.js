@@ -819,7 +819,7 @@ module.exports = function(app,io) {
 
 	app.get('/api/getShippers',function (req,res) {
 		var batchNo = req.query.batchNo;
-		var query = "SELECT * FROM Records where BatchNo = '"+batchNo+"' and Status = 1 order by ID desc";
+		var query = "SELECT * FROM Records where BatchNo = '"+batchNo+"' and Status = 1 order by ShipperNo desc";
 		db.all(query, function(err, rows) {
 			res.json({'error':false,'data':rows});
 		});
@@ -1008,7 +1008,7 @@ module.exports = function(app,io) {
 
 	app.post('/api/deleteweight',function (req,res) {
 		var id = req.body.id;
-        var query = "Delete from Records where ID = ?";
+        var query = "update Records set Status = 0 where ID = ?";
 		var stmt = db.prepare(query);
 		stmt.run(id);
 		stmt.finalize();
