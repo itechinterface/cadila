@@ -251,7 +251,8 @@ angular.module('starter.controllers', [])
 
             if($scope.Model.selectedBatch!= undefined && $scope.Model.selectedBatch.Status==1){
                 var limit = parseInt(forcePrintLimit)/100;
-                if((lastWeight>=(parseFloat($scope.Model.cMin) - (parseFloat($scope.Model.cMin)*limit).toFixed(3))) && (lastWeight<=(parseFloat($scope.Model.cMax) + parseFloat((parseFloat($scope.Model.cMax)*limit).toFixed(3))))){
+                //if((lastWeight>=(parseFloat($scope.Model.cMin) - (parseFloat($scope.Model.cMin)*limit).toFixed(3))) && (lastWeight<=(parseFloat($scope.Model.cMax) + parseFloat((parseFloat($scope.Model.cMax)*limit).toFixed(3))))){
+                if((lastWeight>=parseFloat($scope.Model.cMin)) && (lastWeight<=parseFloat($scope.Model.cMax))){
                     if(doprint == 0){
                         weightlock = true;
                         doprint = 1;
@@ -342,7 +343,8 @@ angular.module('starter.controllers', [])
                 }
                 else{
                     var limit = parseInt(forcePrintLimit)/100;
-                    if((lastWeight>=(parseFloat($scope.Model.cMin) - (parseFloat($scope.Model.cMin)*limit).toFixed(3))) && (lastWeight<=(parseFloat($scope.Model.cMax) + parseFloat((parseFloat($scope.Model.cMax)*limit).toFixed(3))))){
+                    //if((lastWeight>=(parseFloat($scope.Model.cMin) - (parseFloat($scope.Model.cMin)*limit).toFixed(3))) && (lastWeight<=(parseFloat($scope.Model.cMax) + parseFloat((parseFloat($scope.Model.cMax)*limit).toFixed(3))))){
+                    if((lastWeight>=parseFloat($scope.Model.cMin)) && (lastWeight<=parseFloat($scope.Model.cMax))){
                         if(doprint == 0){
                             weightlock = true;
                             doprint = 1;

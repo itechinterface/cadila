@@ -882,9 +882,13 @@ module.exports = function(app,io) {
 		
 		var query = "UPDATE NewBatchRecord set ShipperNo = ? where ID = ?";
 		var stmt = db.prepare(query);
-		stmt.run(parseInt(printData.ShipperNo)+1,printData.NB_ID);
+		var sh_no = parseInt(printData.ShipperNo);
+		sh_no++;
+		stmt.run(sh_no,printData.NB_ID);
 		stmt.finalize();
 		
+		io.sockets.emit('printdone', "ok");
+
 		if(format == 1)
 		{
 			for(var i=0;i<PrintCopies;i++) {
@@ -897,7 +901,6 @@ module.exports = function(app,io) {
 			}
 		}
 
-		io.sockets.emit('printdone', "ok");
 		res.json({'error':false});
 	});
 
