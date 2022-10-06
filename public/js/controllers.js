@@ -1886,12 +1886,21 @@ angular.module('starter.controllers', [])
         }
 
         // RunAdminSettings();
-
+        var isSATO = false;
         $scope.view22 = function(cmd){
             console.log(cmd);
+            var url = "";
+            if(isSATO)
+            {
+                url = 'http://api.labelary.com/v1/printers/12dpmm/labels/2x2/0/'+cmd;
+            }
+            if(!isSATO)
+            {
+                url = 'http://api.labelary.com/v1/printers/8dpmm/labels/2x2/0/'+cmd;
+            }
             $http({
             method: 'GET',
-            url: 'http://api.labelary.com/v1/printers/8dpmm/labels/2x2/0/'+cmd,
+            url: url,
             responseType: 'arraybuffer'
             }).then(function(response) {
             var str = _arrayBufferToBase64(response.data);
@@ -1904,9 +1913,18 @@ angular.module('starter.controllers', [])
 
         $scope.view43 = function(cmd){
             console.log(cmd);
+            var url = "";
+            if(isSATO)
+            {
+                url = 'http://api.labelary.com/v1/printers/12dpmm/labels/4x3/0/'+cmd;
+            }
+            if(!isSATO)
+            {
+                url = 'http://api.labelary.com/v1/printers/8dpmm/labels/4x3/0/'+cmd;
+            }
             $http({
             method: 'GET',
-            url: 'http://api.labelary.com/v1/printers/8dpmm/labels/4x3/0/'+cmd,
+            url: url,
             responseType: 'arraybuffer'
             }).then(function(response) {
             var str = _arrayBufferToBase64(response.data);
