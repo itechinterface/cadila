@@ -632,7 +632,7 @@ module.exports = function(app,io) {
 
 	app.get('/api/records',function (req,res) {
 		var filename = req.query.filename;
-		var query = "SELECT  *  FROM Records where BatchNo = "+filename+" order by ShipperNo desc";
+		var query = "SELECT  *  FROM Records where BatchNo = "+filename+" order by ShipperNo asc";
 		db.all(query, function(err, rows) {
 			//console.log(rows);
 			res.json({'error':false,'data':rows});
