@@ -257,7 +257,7 @@ angular.module('starter.controllers', [])
                         if(lastWeight > 0.050){
                             weightlock = true;
                             doprint = 1;
-                            greenOn();
+                            //greenOn();
                             $timeout(function () {
                                 $http({
                                     url: '/api/printweight',
@@ -279,7 +279,7 @@ angular.module('starter.controllers', [])
                         if(lastWeight > 0.050){
                             weightlock = true;
                             doprint = 1;
-                            greenOn();
+                            //greenOn();
                             $timeout(function () {
                                 $http({
                                     url: '/api/printweight',
@@ -327,7 +327,7 @@ angular.module('starter.controllers', [])
                         if(lastWeight > 0.050){
                             weightlock = true;
                             doprint = 1;
-                            greenOn();
+                            //greenOn();
                             $timeout(function () {
                                 $http({
                                     url: '/api/printweight',
@@ -352,7 +352,7 @@ angular.module('starter.controllers', [])
                         if(doprint == 0){
                             weightlock = true;
                             doprint = 1;
-                            greenOn();
+                            //greenOn();
                             $timeout(function () {
                                 //socket.emit("printweight",{"weight":lastWeightData,"forceprint":false,"format":$scope.Model.selectedBatch.PrintFormat,"data":$scope.Model.selectedBatch,"wn":window.localStorage.getItem('wn'),"shift":window.localStorage.getItem('shift')});
                                 $http({
