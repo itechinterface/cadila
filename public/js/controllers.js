@@ -218,7 +218,7 @@ angular.module('starter.controllers', [])
         });
 
         function forceP(){
-
+            
             // //DummyStart
             // doprint = 0;
             // weightlock = false;
@@ -254,43 +254,47 @@ angular.module('starter.controllers', [])
                 //if((lastWeight>=(parseFloat($scope.Model.cMin) - (parseFloat($scope.Model.cMin)*limit).toFixed(3))) && (lastWeight<=(parseFloat($scope.Model.cMax) + parseFloat((parseFloat($scope.Model.cMax)*limit).toFixed(3))))){
                 if((lastWeight>=parseFloat($scope.Model.cMin)) && (lastWeight<=parseFloat($scope.Model.cMax))){
                     if(doprint == 0){
-                        weightlock = true;
-                        doprint = 1;
-                        greenOn();
-                        $timeout(function () {
-                            $http({
-                                url: '/api/printweight',
-                                method: "POST",
-                                data: {"weight":lastWeightData,"forceprint":false,"format":$scope.Model.selectedBatch.PrintFormat,"data":$scope.Model.selectedBatch,"wn":window.localStorage.getItem('wn'),"shift":window.localStorage.getItem('shift')}
-                            })
-                            .then(function(response) {
-                                
-                            },
-                            function(response) { // optional
-                                
-                            });
-                        },500);
+                        if(lastWeight > 0.050){
+                            weightlock = true;
+                            doprint = 1;
+                            greenOn();
+                            $timeout(function () {
+                                $http({
+                                    url: '/api/printweight',
+                                    method: "POST",
+                                    data: {"weight":lastWeightData,"forceprint":false,"format":$scope.Model.selectedBatch.PrintFormat,"data":$scope.Model.selectedBatch,"wn":window.localStorage.getItem('wn'),"shift":window.localStorage.getItem('shift')}
+                                })
+                                .then(function(response) {
+                                    
+                                },
+                                function(response) { // optional
+                                    
+                                });
+                            },500);
+                        }    
                     }
                 }
                 else{
                     if(doprint == 0){
-                        weightlock = true;
-                        doprint = 1;
-                        greenOn();
-                        $timeout(function () {
-                            $http({
-                                url: '/api/printweight',
-                                method: "POST",
-                                data: {"weight":lastWeightData,"forceprint":true,"format":$scope.Model.selectedBatch.PrintFormat,"data":$scope.Model.selectedBatch,"wn":window.localStorage.getItem('wn'),"shift":window.localStorage.getItem('shift')}
-                            })
-                            .then(function(response) {
-                                
-                            },
-                            function(response) { // optional
-                                
-                            });
-                            // socket.emit("printweight",{"weight":lastWeightData,"forceprint":true,"format":$scope.Model.selectedBatch.PrintFormat,"data":$scope.Model.selectedBatch,"wn":window.localStorage.getItem('wn'),"shift":window.localStorage.getItem('shift')});
-                        },500);
+                        if(lastWeight > 0.050){
+                            weightlock = true;
+                            doprint = 1;
+                            greenOn();
+                            $timeout(function () {
+                                $http({
+                                    url: '/api/printweight',
+                                    method: "POST",
+                                    data: {"weight":lastWeightData,"forceprint":true,"format":$scope.Model.selectedBatch.PrintFormat,"data":$scope.Model.selectedBatch,"wn":window.localStorage.getItem('wn'),"shift":window.localStorage.getItem('shift')}
+                                })
+                                .then(function(response) {
+                                    
+                                },
+                                function(response) { // optional
+                                    
+                                });
+                                // socket.emit("printweight",{"weight":lastWeightData,"forceprint":true,"format":$scope.Model.selectedBatch.PrintFormat,"data":$scope.Model.selectedBatch,"wn":window.localStorage.getItem('wn'),"shift":window.localStorage.getItem('shift')});
+                            },500);
+                        }
                     }
                 }
             }
