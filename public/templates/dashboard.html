@@ -79,14 +79,13 @@
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" style="margin-top: -15px">
-                <div ng-show="Model.isLogin">
                 <!-- <li ng-hide="Model.showAdminView" class="header">SETTINGS</li> -->
                 <!-- <li ng-hide="Model.showAdminView">
                     <a href="" ng-click="dashboard()">
                         <i class="fa fa-th"></i> <span>Dashboard</span>
                     </a>
                 </li> -->
-                <li>
+                <li ng-show="Model.isLogin">
                     <a href="" ng-click="createNewBatch()">
                         <i class="fa fa-th"></i> <span>Create New Batch</span>
                     </a>
@@ -101,17 +100,17 @@
                         <!--<i class="fa fa-th"></i> <span>Batch Completed</span> <small class="label pull-right bg-green">{{Model.totalCompleted}}</small>-->
                     <!--</a>-->
                 <!--</li>-->
-                <li>
+                <li ng-show="Model.isLogin">
                     <a href="" ng-click="batchFilter(-1)">
                         <i class="fa fa-th"></i> <span>Batch List</span> <small class="label pull-right bg-blue">{{Model.totalAll}}</small>
                     </a>
                 </li>
-                <li>
+                <li ng-show="Model.isLogin">
                     <a href="" ng-click="recordMasterList()">
                         <i class="fa fa-th"></i> <span>Master List</span>
                     </a>
                 </li>
-                <li>
+                <li ng-show="Model.isLogin">
                     <a href="" ng-click="masterRecord()">
                         <i class="fa fa-th"></i> <span>Create New Record Master</span>
                     </a>
@@ -121,33 +120,32 @@
                         <!--<i class="fa fa-th"></i> <span>Zero</span>-->
                     <!--</a>-->
                 <!--</li>-->
-                <li ng-hide="Model.showAdminView">
+                <li ng-hide="!Model.isLogin || Model.showAdminView">
                     <a href="" ng-click="manual()">
                         <i class="fa fa-th"></i> <span>Manual Print</span>
                     </a>
                 </li>
-                <li ng-hide="Model.showAdminView">
+                <li ng-hide="!Model.isLogin || Model.showAdminView">
                     <a href="" ng-click="adminSettings()">
                         <i class="fa fa-th"></i> <span>Admin Settings</span>
                     </a>
                 </li>
-                <li ng-hide="Model.showAdminView">
+                <li ng-hide="!Model.isLogin || Model.showAdminView">
                     <a href="" ng-click="screenLock()">
                         <i class="fa fa-th"></i> <span> Screen Lock</span><i class="pull-right fa fa-unlock-alt"></i>
                     </a>
                 </li>
-                <li>
+                <li ng-show="Model.isLogin">
                     <a href="" ng-click="logout()">
                         <i class="fa fa-th"></i> <span>Logout</span>
                     </a>
                 </li>
-                </div>
                 <br>
-                <li>
+                <!-- <li>
                     <a href="images/ZD230.mp4" target="_blank" style="font-size: large;color: darkorange;">
                         <i class="fa fa-question-circle"></i> <span>How to Start</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="images/ZD230.mp4" target="_blank" style="font-size: large;color: darkorange;">
                         <i class="fa fa-question-circle"></i> <span>Printer Setup</span>

@@ -258,7 +258,7 @@ module.exports = function(app,io) {
 			//NEW-TSC
 			if(!isSATO)
 			{
-				printer_.write("^XA^PW400^LL400^LS0", function (err) {
+				printer_.write("^XA^PR14^MD30^PW400^LL400^LS0", function (err) {
 				});
 			}
 			
@@ -330,7 +330,7 @@ module.exports = function(app,io) {
 			
 			if(!isSATO)
 			{
-				printer_.write("^XA^PW799^LL599^LS0", function (err) {
+				printer_.write("^XA^PR14^MD30^PW799^LL599^LS0", function (err) {
 				});
 				printer_.write("^FO0,180^GB799,0,3^FS", function (err) {
 				});
@@ -916,33 +916,46 @@ module.exports = function(app,io) {
 		weight = weight.toString();
                         
 		var date = getDate();
-		var stmt = db.prepare("INSERT INTO Records('BatchNo','ShipperNo','MasterNumber','ProductName','MfgNo','MfgLicNo','MfgDate','ExpDate','Weight','DateTime','User','ShiftTime','Created','Status')" +
+
+		var query = "select ShipperNo from  NewBatchRecord where ID = "+printData.NB_ID;
+		db.all(query, function(err, rows) {
+			console.log(rows);
+			printData.ShipperNo = rows[0].ShipperNo;
+			console.log(printData.ShipperNo);
+			var stmt = db.prepare("INSERT INTO Records('BatchNo','ShipperNo','MasterNumber','ProductName','MfgNo','MfgLicNo','MfgDate','ExpDate','Weight','DateTime','User','ShiftTime','Created','Status')" +
 			"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-		stmt.run(printData.NB_ID,parseInt(printData.ShipperNo),printData.MasterNumber,printData.ProductName,printData.MfgNo,printData.MfgLicNo,printData.MfgDate,printData.ExpDate,weight,date,wn.toUpperCase(),shift_time,getDate(),1);
-		stmt.finalize();
-		
-		var query = "UPDATE NewBatchRecord set ShipperNo = ? where ID = ?";
-		var stmt = db.prepare(query);
-		var sh_no = parseInt(printData.ShipperNo);
-		sh_no++;
-		stmt.run(sh_no,printData.NB_ID);
-		stmt.finalize();
-		
-		io.sockets.emit('printdone', "ok");
+			stmt.run(printData.NB_ID,parseInt(printData.ShipperNo),printData.MasterNumber,printData.ProductName,printData.MfgNo,printData.MfgLicNo,printData.MfgDate,printData.ExpDate,weight,date,wn.toUpperCase(),shift_time,getDate(),1);
+			//stmt.run(printData.NB_ID,parseInt(printData.ShipperNo),printData.MasterNumber,printData.ProductName,printData.MfgNo,printData.MfgLicNo,printData.MfgDate,printData.ExpDate,weight,date,wn.toUpperCase(),shift_time,getDate(),1);
+			stmt.finalize();
+			
+			query = "UPDATE NewBatchRecord set ShipperNo = ShipperNo+1 where ID = "+printData.NB_ID;
+			db.all(query, function(err, rows) {
+				console.log(err);
+				console.log(rows);
+				io.sockets.emit('printdone', "ok");
+				if(format == 1)
+				{
+					for(var i=0;i<PrintCopies;i++) {
+						Print4x3_300(weight,printData,shift_time,getDate2(),data.wn);
+					}
+				}
+				else{
+					for(var i=0;i<PrintCopies;i++) {
+						Print2x2_300(weight,printData,shift_time,getDate2(),data.wn);
+					}
+				}
+				res.json({'error':false});
+			});
+		});
 
-		if(format == 1)
-		{
-			for(var i=0;i<PrintCopies;i++) {
-				Print4x3_300(weight,printData,shift_time,getDate2(),data.wn);
-			}
-		}
-		else{
-			for(var i=0;i<PrintCopies;i++) {
-				Print2x2_300(weight,printData,shift_time,getDate2(),data.wn);
-			}
-		}
-
-		res.json({'error':false});
+		
+		// var stmt = db.prepare(query);
+		// var sh_no = parseInt(printData.ShipperNo);
+		// sh_no++;
+		// stmt.run(sh_no,printData.NB_ID);
+		// stmt.finalize();
+		
+		
 	});
 
 	app.post('/api/testprint',function (req,res) {
@@ -1187,7 +1200,7 @@ module.exports = function(app,io) {
 			}
 			if(!isSATO)
 			{
-				str = "^XA^PW400^LL400^LS0";
+				str = "^XA^PR14^MD30^PW400^LL400^LS0";
 			}
 			for (var i = 0; i < label_settings_2x2.length; i++) {
 					var item = label_settings_2x2[i];
@@ -1257,7 +1270,7 @@ module.exports = function(app,io) {
 
 			if(!isSATO)
 			{
-				str = "^XA^PW799^LL599^LS0";
+				str = "^XA^PR14^MD30^PW799^LL599^LS0";
 				str+="^FO0,180^GB799,0,3^FS";
 				str+="^FO40,280^A0N,30,30^FDManufactured by:^FS^FS^FS";
 				str+="^FO40,340^A0N,50,45^FDCADILA^FS ^FS ^FS"
