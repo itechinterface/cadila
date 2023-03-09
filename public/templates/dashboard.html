@@ -78,7 +78,8 @@
                 </div>
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu" ng-show="Model.isLogin" style="margin-top: -15px">
+            <ul class="sidebar-menu" style="margin-top: -15px">
+                <div ng-show="Model.isLogin">
                 <!-- <li ng-hide="Model.showAdminView" class="header">SETTINGS</li> -->
                 <!-- <li ng-hide="Model.showAdminView">
                     <a href="" ng-click="dashboard()">
@@ -140,7 +141,21 @@
                         <i class="fa fa-th"></i> <span>Logout</span>
                     </a>
                 </li>
+                </div>
+                <br>
+                <li>
+                    <a href="images/ZD230.mp4" target="_blank" style="font-size: large;color: darkorange;">
+                        <i class="fa fa-question-circle"></i> <span>How to Start</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="images/ZD230.mp4" target="_blank" style="font-size: large;color: darkorange;">
+                        <i class="fa fa-question-circle"></i> <span>Printer Setup</span>
+                    </a>
+                </li>
             </ul>
+
+            
 
             <ul ng-hide="Model.showAdminView" class="sidebar-menu" style="margin-top: -15px">
 
