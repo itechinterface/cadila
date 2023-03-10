@@ -217,20 +217,29 @@ module.exports = function(app,io) {
 				var stats = fs.lstatSync('/dev/usb');
 				if (stats.isDirectory()) {
 
-
-					var result = exec("echo RaspberryPi | sudo -S chmod a+rw /dev/usb/lp0", function (error, stdout, stderr) {
-                                                try{
-						printer = new SerialPort('/dev/usb/lp0', { baudrate: 9600});
-                                                console.log("Open Printer Port");
-                                                    }
-                                                    catch(e){}
-						return printer;
-					});
-
+					if(fs.existsSync('/dev/usb/lp0'))
+					{
+						var result = exec("echo RaspberryPi | sudo -S chmod a+rw /dev/usb/lp0", function (error, stdout, stderr) {
+							try{
+							printer = new SerialPort('/dev/usb/lp0', { baudrate: 9600});
+													console.log("Open Printer Port");
+														}
+														catch(e){}
+							return printer;
+						});
+					}
+					else{
+						setTimeout(function(){
+								initPrinter();
+						},1000);
+					}	
 				}
 			}
 			catch(err){
-				console.log("Error on printer"+err);
+				setTimeout(function(){
+					initPrinter();
+				},1000);
+				//console.log("Error on printer"+err);
 			}
 		}
 		else{
@@ -597,26 +606,33 @@ module.exports = function(app,io) {
 		var username = req.query.username;
 		var password = req.query.password;
 		workername = req.query.workername;
-                if(workername == undefined)
-                {
-                    res.json({'error':true,'message':'Invalid Workername'});
-                }
-                else if(!workername.length > 0){
-                    res.json({'error':true,'message':'Invalid Workername'});
-                }
-                else{
-                    var query = "SELECT * FROM Users where Username = '"+username+"' and Password = '"+password+"'";
-					db.all(query, function(err, rows) {
-							if(rows.length > 0)
-							{
-									res.json({'error':false,'message':'Login Successfully','data':rows[0]});
-							}
-							else{
-									res.json({'error':true,'message':'Invalid username or password'});
-							}
-					});
-                }
-	});
+
+		if(printer == undefined)
+		{
+			res.json({'error':true,'message':'Please Power on the Printer.'});
+		}
+		else{
+			if(workername == undefined)
+			{
+				res.json({'error':true,'message':'Invalid Workername'});
+			}
+			else if(!workername.length > 0){
+				res.json({'error':true,'message':'Invalid Workername'});
+			}
+			else{
+				var query = "SELECT * FROM Users where Username = '"+username+"' and Password = '"+password+"'";
+				db.all(query, function(err, rows) {
+						if(rows.length > 0)
+						{
+								res.json({'error':false,'message':'Login Successfully','data':rows[0]});
+						}
+						else{
+								res.json({'error':true,'message':'Invalid username or password'});
+						}
+				});
+			}
+		}
+    });
 
 	app.get('/api/getUsersList',function (req,res) {
 
