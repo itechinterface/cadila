@@ -214,26 +214,27 @@ module.exports = function(app,io) {
 		if(printer == undefined)
 		{
 			try{
-				var stats = fs.lstatSync('/dev/usb');
-				if (stats.isDirectory()) {
+				// var stats = fs.lstatSync('/dev/usb');
+				// if (stats.isDirectory()) {
 
-					if(fs.existsSync('/dev/usb/lp0'))
-					{
-						var result = exec("echo RaspberryPi | sudo -S chmod a+rw /dev/usb/lp0", function (error, stdout, stderr) {
-							try{
-							printer = new SerialPort('/dev/usb/lp0', { baudrate: 9600});
-													console.log("Open Printer Port");
-														}
-														catch(e){}
-							return printer;
-						});
-					}
-					else{
-						setTimeout(function(){
-								initPrinter();
-						},1000);
-					}	
+					
+				// }
+				if(fs.existsSync('/dev/usb/lp0'))
+				{
+					var result = exec("echo RaspberryPi | sudo -S chmod a+rw /dev/usb/lp0", function (error, stdout, stderr) {
+						try{
+						printer = new SerialPort('/dev/usb/lp0', { baudrate: 9600});
+												console.log("Open Printer Port");
+													}
+													catch(e){}
+						return printer;
+					});
 				}
+				else{
+					setTimeout(function(){
+							initPrinter();
+					},1000);
+				}	
 			}
 			catch(err){
 				setTimeout(function(){
